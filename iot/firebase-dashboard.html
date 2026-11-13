@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4: Firebase IoT Monitoring Dashboard | Pranav S — IoT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="iot.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="wrap navbar">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">PS</span>
+      <span>Pranav S <span class="mono" style="color:var(--text-faint);font-size:12px;">/ IoT Station</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html" class="nav-link">Main Portfolio</a>
+      <a href="index.html" class="nav-link active">All 5 Assignments</a>
+      <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" class="btn btn-live" style="padding:6px 14px;font-size:12px;">
+        ● Live Web App
+      </a>
+      <a href="https://github.com/pranav222006/portfolio" target="_blank" class="back-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="task-eyebrow">
+      <span class="badge badge-accent">Station 04 of 05</span>
+      <span class="badge badge-success">✓ Verified & Complete</span>
+      <span class="badge badge-live">● Live Firebase Deployment</span>
+    </div>
+
+    <h1 class="hero-title">Firebase IoT <span>Monitoring Dashboard</span></h1>
+    <p class="hero-lead">
+      Production full-stack IoT architecture. Integrating Google Firebase Realtime Database and Firebase Authentication with an ESP32 edge node to stream real-time temperature, humidity, and ambient light telemetry, paired with authenticated bi-directional 230V AC appliance relay control.
+    </p>
+
+    <div class="hero-meta-bar">
+      <div class="hero-meta-item"><strong>Cloud Backend:</strong> Google Firebase (BaaS)</div>
+      <div class="hero-meta-item"><strong>Live Web App:</strong> <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" style="color:var(--accent);text-decoration:underline;">smart-home-3309d.web.app</a></div>
+      <div class="hero-meta-item"><strong>Sensors:</strong> DHT11 (Temp/Hum) + LDR (Light Divider)</div>
+      <div class="hero-meta-item"><strong>Security:</strong> Firebase Token Auth (Email/Password)</div>
+    </div>
+  </section>
+
+  <!-- QUICK TOC BAR -->
+  <nav class="toc-bar">
+    <a href="#overview" class="toc-link">01. Overview</a>
+    <a href="#concepts" class="toc-link">02. Concepts</a>
+    <a href="#design" class="toc-link">03. System Design</a>
+    <a href="#hardware" class="toc-link">04. Hardware & Software</a>
+    <a href="#wiring" class="toc-link">05. Wiring & Setup</a>
+    <a href="#implementation" class="toc-link">06. Implementation</a>
+    <a href="#configuration" class="toc-link">07. Configuration</a>
+    <a href="#evidence" class="toc-link">08. Evidence</a>
+    <a href="#challenges" class="toc-link">09. Challenges & Fixes</a>
+    <a href="#reflection" class="toc-link">10. Reflection</a>
+    <a href="#repository" class="toc-link">11. Repository</a>
+  </nav>
+
+  <!-- ==========================================================================
+       SECTION 01: OVERVIEW
+       ========================================================================== -->
+  <section id="overview" class="section">
+    <div class="section-head">
+      <span class="section-idx">01 · Station Overview</span>
+      <h2 class="section-title">Objective & Problem Definition</h2>
+    </div>
+
+    <div class="card card-accent" style="margin-bottom:20px;">
+      <h3>One-Paragraph Summary</h3>
+      <p>
+        The objective of this assignment is to architect a bespoke, secure, full-stack IoT telemetry and control platform utilizing Google Firebase Realtime Database and Firebase Authentication. By combining multi-sensor acquisition (DHT11 temperature & humidity, LDR ambient lighting) with high-voltage optoisolated relay switching and a secure user-authenticated single-page web dashboard, this project solves the fundamental limitation of proprietary no-code IoT brokers by providing granular data ownership, sub-second latency, and role-based access control.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>The Problem Solved</h3>
+        <p>
+          Generic IoT portals (like Adafruit IO or Blynk) enforce strict data throttling, impose vendor lock-in, and lack flexible enterprise authentication models. Homeowners and plant managers require a custom web interface where multi-sensor environmental parameters can be monitored concurrently, with strict cryptographic authentication preventing unauthorized bad actors from manipulating physical mains-voltage appliances.
+        </p>
+      </div>
+      <div class="card">
+        <h3>The Full-Stack Solution</h3>
+        <p>
+          We deployed an ESP32 edge microcontroller running the <code>Firebase_ESP_Client</code> library alongside a client-side JavaScript Single Page Application (SPA) hosted on Firebase Hosting at <code>https://smart-home-3309d.web.app/#dashboard</code>. Both nodes maintain real-time WebSocket connections to a shared NoSQL JSON document tree in Google Cloud.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 02: CONCEPTS
+       ========================================================================== -->
+  <section id="concepts" class="section">
+    <div class="section-head">
+      <span class="section-idx">02 · Technical Foundation</span>
+      <h2 class="section-title">Cloud Computing & Database Concepts</h2>
+      <p class="section-desc">Theoretical foundations articulated from a Mechatronics and software engineering perspective.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>What is Cloud Computing?</h3>
+        <p>
+          Cloud computing is the on-demand delivery of compute power, database storage, applications, and other IT resources via the internet with pay-as-you-go pricing. Instead of running physical servers in a local closet, computing workloads run across globally distributed data centers managed by hyper-scalers (Google Cloud, AWS, Microsoft Azure).
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Cloud Service Models: IaaS, PaaS, SaaS & BaaS</h3>
+        <ul style="color:var(--text-dim);padding-left:18px;margin:0;font-size:13.5px;">
+          <li style="margin-bottom:6px;"><strong>IaaS (Infrastructure as a Service):</strong> Raw virtual machines, networking, and storage (e.g., AWS EC2, Google Compute Engine). You manage the OS and runtime.</li>
+          <li style="margin-bottom:6px;"><strong>PaaS (Platform as a Service):</strong> Managed execution environment where you deploy source code without managing the OS (e.g., Heroku, Render).</li>
+          <li style="margin-bottom:6px;"><strong>SaaS (Software as a Service):</strong> End-user web applications accessible directly in the browser (e.g., Gmail, Google Docs).</li>
+          <li style="margin-bottom:0;"><strong>BaaS (Backend as a Service):</strong> Pre-built cloud backends providing authentication, real-time NoSQL databases, push notifications, and hosting through unified client SDKs (e.g., <strong>Google Firebase</strong>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:20px;">
+      <div class="card">
+        <h3>What is a Database?</h3>
+        <p>
+          An organized, electronically stored collection of data. While traditional relational databases (SQL) organize data into structured tables with rigid schemas, <strong>NoSQL databases</strong> store data as flexible JSON trees or key-value pairs, ideal for rapidly changing IoT sensor streams.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Firebase Realtime Database</h3>
+        <p>
+          A cloud-hosted NoSQL JSON database. Whenever any client (the ESP32 or the web browser) writes to a node in the tree, all other connected clients listening to that node receive the update within milliseconds over a persistent bi-directional WebSocket connection.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Authentication vs. Authorization</h3>
+        <p>
+          <strong>Authentication (AuthN):</strong> "Who are you?" Verifying user identity via email/password credentials or JWT cryptographic tokens.
+          <br><strong>Authorization (AuthZ):</strong> "What are you allowed to do?" Determining whether an authenticated user has permission to toggle the physical 230V relay or only view read-only sensor telemetry.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 03: SYSTEM DESIGN
+       ========================================================================== -->
+  <section id="design" class="section">
+    <div class="section-head">
+      <span class="section-idx">03 · Architecture</span>
+      <h2 class="section-title">System Architecture & NoSQL Data Schema</h2>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-flow">
+        <div class="flow-node">
+          <div class="node-type">Edge Sensors</div>
+          <div class="node-label">DHT11 (Temp/Hum)<br>LDR Analog Divider</div>
+        </div>
+        <div class="flow-arrow">────── GPIO 4 & 34 ──────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Edge Controller</div>
+          <div class="node-label">ESP32 Firmware<br>(Firebase ESP Client)</div>
+        </div>
+        <div class="flow-arrow">◄───── HTTPS / WSS ─────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Cloud Database</div>
+          <div class="node-label">Firebase Realtime DB<br>(smart-home-3309d)</div>
+        </div>
+        <div class="flow-arrow">◄───── WebSockets ─────►</div>
+        <div class="flow-node">
+          <div class="node-type">Web Frontend</div>
+          <div class="node-label">Authenticated SPA<br>(Chart.js + UI Cards)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Firebase Realtime Database JSON Tree Schema</h3>
+      <div class="code-container" style="margin:12px 0 0;">
+        <div class="code-header">
+          <span class="lang-tag">JSON Schema (smart-home-3309d-default-rtdb)</span>
+        </div>
+        <pre class="code-block"><code>{
+  "sensors": {
+    "temperature": 27.8,       // Current DHT11 temperature in degrees Celsius
+    "humidity": 64.0,          // Current DHT11 relative humidity in percentage
+    "light_level": 742,        // Scaled ambient light reading from LDR ADC (0-1000)
+    "last_updated": 1722409852 // Unix epoch timestamp synchronized via NTP
+  },
+  "controls": {
+    "bulb_state": true,        // Boolean relay actuation state: true = ON, false = OFF
+    "manual_mode": true,       // Mode toggle: true = Manual control, false = Automated LDR
+    "ldr_threshold": 450       // Calibration threshold for automatic night lighting
+  }
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 04: HARDWARE & SOFTWARE
+       ========================================================================== -->
+  <section id="hardware" class="section">
+    <div class="section-head">
+      <span class="section-idx">04 · Tooling</span>
+      <h2 class="section-title">Hardware & Software Specifications</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Hardware / Software Tool</th>
+            <th>Specification</th>
+            <th>Role in System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ESP32 DevKit V1</strong></td>
+            <td>Xtensa Dual-Core 240MHz, 2.4GHz Wi-Fi</td>
+            <td>Performs ADC sampling, handles DHT protocol, synchronizes with Firebase</td>
+          </tr>
+          <tr>
+            <td><strong>DHT11 Sensor</strong></td>
+            <td>Temp Range: 0–50°C (±2°C), Hum: 20–90% (±5%)</td>
+            <td>Measures ambient environmental temperature and relative humidity</td>
+          </tr>
+          <tr>
+            <td><strong>LDR (Photoresistor)</strong></td>
+            <td>Light resistance ~1kΩ (Daylight) to >100kΩ (Dark)</td>
+            <td>Connected in voltage divider to sense ambient illumination</td>
+          </tr>
+          <tr>
+            <td><strong>Optocoupled Relay Module</strong></td>
+            <td>Songle 5V Relay, 10A 250VAC / 10A 30VDC</td>
+            <td>Safely switches mains voltage AC incandescent bulb</td>
+          </tr>
+          <tr>
+            <td><strong>Google Firebase Platform</strong></td>
+            <td>Realtime Database + Firebase Hosting + Auth</td>
+            <td>Serverless cloud storage, WebSocket broker, and web hosting</td>
+          </tr>
+          <tr>
+            <td><strong>Web Frontend Stack</strong></td>
+            <td>HTML5, CSS3, JavaScript (ES6+), Chart.js</td>
+            <td>Single Page Application dashboard with responsive glassmorphism</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 05: WIRING / SETUP
+       ========================================================================== -->
+  <section id="wiring" class="section">
+    <div class="section-head">
+      <span class="section-idx">05 · Schematics</span>
+      <h2 class="section-title">Wiring, Pin Connections & Sensor Interfacing</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>ESP32 Pin</th>
+            <th>Interfaced Component</th>
+            <th>Circuit Topography</th>
+            <th>Logic / Operational Behavior</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>GPIO 4</code></td>
+            <td>DHT11 DATA Pin</td>
+            <td>Pulled up to 3.3V with 10kΩ resistor</td>
+            <td>Single-wire bidirectional asynchronous digital protocol</td>
+          </tr>
+          <tr>
+            <td><code>GPIO 34</code></td>
+            <td>LDR Voltage Divider Junction</td>
+            <td>LDR in series with 10kΩ fixed resistor to GND</td>
+            <td>ADC1 analog voltage input (12-bit resolution: 0 to 4095)</td>
+          </tr>
+          <tr>
+            <td><code>GPIO 18</code></td>
+            <td>Relay Module IN Pin</td>
+            <td>Connected directly to relay optocoupler input</td>
+            <td>Digital Output: HIGH = Energize coil (Relay ON) / LOW = OFF</td>
+          </tr>
+          <tr>
+            <td><code>3.3V & GND</code></td>
+            <td>DHT11 & LDR Power Rails</td>
+            <td>Filtered 3.3V supply from onboard AMS1117</td>
+            <td>Reference voltage for accurate ADC and sensor operations</td>
+          </tr>
+          <tr>
+            <td><code>5V (VIN) & GND</code></td>
+            <td>Relay Module VCC & GND</td>
+            <td>Direct 5V supply line</td>
+            <td>Drives mechanical relay coil without overloading 3.3V LDO</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 06: IMPLEMENTATION
+       ========================================================================== -->
+  <section id="implementation" class="section">
+    <div class="section-head">
+      <span class="section-idx">06 · Implementation</span>
+      <h2 class="section-title">ESP32 Firmware & Frontend Source Code</h2>
+      <p class="section-desc">Clean, fully documented production firmware and client-side web application code.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="lang-tag">C++ / Arduino (esp32_firebase_telemetry.ino)</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-t4-firmware').innerText)">Copy Code</button>
+      </div>
+      <pre class="code-block" id="code-t4-firmware"><code>#include &lt;WiFi.h&gt;
+#include &lt;Firebase_ESP_Client.h&gt;
+#include &lt;DHT.h&gt;
+#include "time.h"
+
+// Wi-Fi Credentials
+#define WIFI_SSID       "YOUR_WIFI_SSID"
+#define WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
+
+// Firebase Project Credentials
+#define API_KEY         "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXX"
+#define DATABASE_URL    "https://smart-home-3309d-default-rtdb.firebaseio.com/"
+#define USER_EMAIL      "user@smarthome.io"
+#define USER_PASSWORD   "SecretPassword123"
+
+// Hardware Pin Definitions
+#define DHTPIN          4
+#define DHTTYPE         DHT11
+#define LDR_PIN         34
+#define RELAY_PIN       18
+
+// Sensor & Firebase Instances
+DHT dht(DHTPIN, DHTTYPE);
+FirebaseData fbdo;
+FirebaseAuth auth;
+FirebaseConfig config;
+
+// Timing Control (Non-blocking intervals)
+unsigned long lastSensorPublish = 0;
+const unsigned long sensorInterval = 2500; // Sample every 2.5 seconds (respects DHT11)
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW);
+  dht.begin();
+
+  // Connect to Wi-Fi
+  Serial.print("Connecting to Wi-Fi");
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\n[Wi-Fi] Connected!");
+
+  // Synchronize internal clock via NTP (prevents SSL token expiration)
+  configTime(19800, 0, "pool.ntp.org", "time.nist.gov");
+  Serial.println("[NTP] Clock synchronized");
+
+  // Configure Firebase Credentials
+  config.api_key = API_KEY;
+  config.database_url = DATABASE_URL;
+  auth.user.email = USER_EMAIL;
+  auth.user.password = USER_PASSWORD;
+
+  // Initialize and authenticate
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectWiFi(true);
+  Serial.println("[Firebase] Initialized and authenticated!");
+}
+
+void loop() {
+  // Periodically read sensors and publish to Firebase
+  if (Firebase.ready() && (millis() - lastSensorPublish >= sensorInterval)) {
+    lastSensorPublish = millis();
+
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+    int ldrRaw = analogRead(LDR_PIN);
+    // Scale 12-bit ADC (0-4095) down to 0-1000 for intuitive dashboard viewing
+    int lightLevel = map(ldrRaw, 0, 4095, 0, 1000);
+
+    if (!isnan(temp) && !isnan(hum)) {
+      Firebase.RTDB.setFloat(&fbdo, "/sensors/temperature", temp);
+      Firebase.RTDB.setFloat(&fbdo, "/sensors/humidity", hum);
+      Firebase.RTDB.setInt(&fbdo, "/sensors/light_level", lightLevel);
+      Serial.printf("[TELEMETRY] Temp: %.1f C | Hum: %.1f %% | Light: %d\n", temp, hum, lightLevel);
+    }
+  }
+
+  // Stream/Poll Relay Actuation State from Cloud
+  if (Firebase.ready()) {
+    if (Firebase.RTDB.getBool(&fbdo, "/controls/bulb_state")) {
+      bool targetState = fbdo.boolData();
+      digitalWrite(RELAY_PIN, targetState ? HIGH : LOW);
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="code-container" style="margin-top:20px;">
+      <div class="code-header">
+        <span class="lang-tag">JavaScript / Firebase Web SDK (dashboard.js)</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-t4-js').innerText)">Copy Code</button>
+      </div>
+      <pre class="code-block" id="code-t4-js"><code>import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXX",
+  authDomain: "smart-home-3309d.firebaseapp.com",
+  databaseURL: "https://smart-home-3309d-default-rtdb.firebaseio.com",
+  projectId: "smart-home-3309d",
+  storageBucket: "smart-home-3309d.appspot.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const auth = getAuth(app);
+
+// Realtime Telemetry Listeners
+const tempDisplay = document.getElementById("temp-val");
+const humDisplay = document.getElementById("hum-val");
+const lightDisplay = document.getElementById("light-val");
+const bulbToggle = document.getElementById("bulb-toggle-btn");
+
+// Listen for Live Sensor Changes
+onValue(ref(db, "sensors"), (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    tempDisplay.textContent = `${data.temperature.toFixed(1)} °C`;
+    humDisplay.textContent = `${data.humidity.toFixed(1)} %`;
+    lightDisplay.textContent = `${data.light_level} lx`;
+  }
+});
+
+// Listen for Live Relay State
+onValue(ref(db, "controls/bulb_state"), (snapshot) => {
+  const isBulbOn = snapshot.val();
+  bulbToggle.textContent = isBulbOn ? "TURN BULB OFF" : "TURN BULB ON";
+  bulbToggle.className = isBulbOn ? "btn btn-danger" : "btn btn-success";
+});
+
+// Handle User Click to Dispatch Cloud Command
+bulbToggle.addEventListener("click", () => {
+  const currentState = bulbToggle.textContent.includes("OFF");
+  set(ref(db, "controls/bulb_state"), !currentState);
+});</code></pre>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 07: CONFIGURATION
+       ========================================================================== -->
+  <section id="configuration" class="section">
+    <div class="section-head">
+      <span class="section-idx">07 · Cloud Setup</span>
+      <h2 class="section-title">Firebase Console Setup & Security Rules</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. Project Creation</h3>
+        <p>Created project <code>smart-home-3309d</code> on Firebase Console. Provisioned Realtime Database situated in the <code>us-central1</code> location.</p>
+      </div>
+
+      <div class="card">
+        <h3>2. Authentication Config</h3>
+        <p>Enabled the <strong>Email/Password</strong> sign-in provider under the Authentication tab. Generated administrator credentials for authorized dashboard and ESP32 authentication.</p>
+      </div>
+
+      <div class="card">
+        <h3>3. Database Security Rules</h3>
+        <p>Configured rules requiring authenticated token headers for write operations: <code>".read": "auth != null", ".write": "auth != null"</code>, ensuring public guests cannot tamper with relay actuators.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 08: EVIDENCE
+       ========================================================================== -->
+  <section id="evidence" class="section">
+    <div class="section-head">
+      <span class="section-idx">08 · Validation</span>
+      <h2 class="section-title">Hardware & Cloud Verification Evidence</h2>
+    </div>
+
+    <div class="callout callout-info" style="margin-bottom:20px;">
+      <div class="callout-icon">●</div>
+      <div>
+        <strong>Live Production Deployment:</strong> The web dashboard is deployed and operating live at <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" style="color:var(--accent);text-decoration:underline;">https://smart-home-3309d.web.app/#dashboard</a>.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="evidence-card">
+        <img src="firebase-dashboard.jpeg" alt="Figure 4.1: Live Firebase Monitoring Dashboard">
+        <div class="evidence-caption">
+          <strong>Figure 4.1:</strong> Live Smart Home dashboard at <code>smart-home-3309d.web.app</code> displaying real-time Temperature (°C), Humidity (%), Light Level gauge, and interactive Bulb ON/OFF relay control.
+        </div>
+      </div>
+
+      <div class="evidence-card">
+        <img src="esp32-web-server.jpeg" alt="Figure 4.2: Physical Hardware Node with DHT11, LDR and Relay">
+        <div class="evidence-caption">
+          <strong>Figure 4.2:</strong> Physical prototype showing ESP32 wired to DHT11 digital environmental sensor, LDR analog voltage divider, and optocoupled relay driving 230V AC incandescent bulb.
+        </div>
+      </div>
+    </div>
+
+    <div class="video-box" style="margin-top:24px;">
+      <div class="video-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3 style="margin:0 0 8px;">Demonstration Video: Live Monitoring & Cloud Bulb Actuation</h3>
+      <p style="color:var(--text-dim);max-width:600px;margin:0 auto 16px;font-size:14px;">
+        Demonstration showing browser button toggle causing instant relay energization, accompanied by real-time temperature fluctuations when blowing over the DHT11 sensor.
+      </p>
+      <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-4-firebase-dashboard" target="_blank" class="btn btn-primary">
+        Watch Task 4 Demonstration Video →
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 09: CHALLENGES & FIXES (Show the failure, not just the fix)
+       ========================================================================== -->
+  <section id="challenges" class="section">
+    <div class="section-head">
+      <span class="section-idx">09 · Engineering Journal</span>
+      <h2 class="section-title">Challenges Encountered & Root-Cause Fixes</h2>
+    </div>
+
+    <!-- CHALLENGE 1 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-01</span>
+        <span>DHT11 Sporadically Returning "NaN" (Not a Number) Readings</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            During testing, every second or third temperature reading printed <code>NaN</code> on the serial monitor and wrote null values to the Firebase database, corrupting the dashboard metrics.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> The DHT11 capacitive humidity sensor requires a minimum 1.5 to 2.0-second recovery interval between read attempts. My original loop was polling <code>dht.readTemperature()</code> every 300ms, corrupting the internal single-wire 40-bit pulse packet.
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Implemented a non-blocking <code>millis()</code> accumulator gate: <code>if (millis() - lastRead &gt;= 2500)</code>. Gating sensor sampling to strictly once every 2.5 seconds completely eliminated <code>NaN</code> errors and delivered a 100% stable data stream.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE 2 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-02</span>
+        <span>Firebase SSL Handshake TLS Certificate Validation Rejection</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            The ESP32 connected to Wi-Fi successfully but failed to authenticate with Firebase, reporting <code>[ERROR] SSL Handshake Failed: Certificate expired or invalid date</code>.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> Upon boot, the ESP32 internal Real-Time Clock (RTC) initialized to UNIX epoch <code>0</code> (January 1, 1970). Google Firebase SSL certificates carry valid-from/valid-to timestamp constraints; the ESP32 rejected the certificates because it believed it was operating in 1970!
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Added an NTP time synchronization step immediately after Wi-Fi connection in <code>setup()</code>: <code>configTime(19800, 0, "pool.ntp.org", "time.nist.gov");</code>. Once the ESP32 synced its internal clock to the true current time, the SSL handshake succeeded instantly on the first try.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 10: REFLECTION
+       ========================================================================== -->
+  <section id="reflection" class="section">
+    <div class="section-head">
+      <span class="section-idx">10 · Takeaways</span>
+      <h2 class="section-title">Learning Reflection & Next Steps</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Full-Stack IoT Comprehension</h3>
+        <p>
+          This station bridged embedded C++ firmware with cloud NoSQL databases and modern JavaScript web frontends. Developing a custom dashboard highlighted how WebSockets minimize latency compared to polling, and underscored the absolute necessity of rigorous token-based authentication when controlling physical AC loads.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Advancement to Station 05</h3>
+        <p>
+          While live telemetry is vital, industrial systems also require <strong>historical data logging</strong>, <strong>automated closed-loop LDR hysteresis control</strong>, and <strong>regulatory CSV data export</strong>. Station 05 unites all these features into the final master project.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 11: REPOSITORY LINK
+       ========================================================================== -->
+  <section id="repository" class="section">
+    <div class="section-head">
+      <span class="section-idx">11 · Artifacts</span>
+      <h2 class="section-title">Project Repository & Verification Checklist</h2>
+    </div>
+
+    <div class="checklist-box" style="margin-bottom:24px;">
+      <h3 style="margin:0 0 16px;">Station 04 Deliverables Compliance Matrix</h3>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Objective of Firebase IoT monitoring system specified</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Cloud Computing, IaaS, PaaS, SaaS, and BaaS defined</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Firebase Realtime Database & NoSQL JSON schema explained</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Authentication vs. Authorization distinctions documented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>DHT11 & LDR sensor wiring with optoisolated relay documented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Complete compilable ESP32 C++ firmware & frontend JS source code</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Live deployment verified at smart-home-3309d.web.app/#dashboard</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Failure vs. Fix log documented (DHT11 NaN + NTP SSL clock sync)</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Learning reflection & exact repository directory linked</span></div>
+    </div>
+
+    <div class="card" style="text-align:center;padding:32px;">
+      <h3 style="justify-content:center;margin-bottom:12px;">Access Complete Source Files</h3>
+      <p style="max-width:550px;margin:0 auto 20px;">
+        All code, circuit schematics, Firebase rules, and frontend web assets for Station 04 are available in the GitHub repository.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" class="btn btn-live">
+          Open Live Smart Home Dashboard →
+        </a>
+        <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-4-firebase-dashboard" target="_blank" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View Task 4 Folder on GitHub →
+        </a>
+      </div>
+    </div>
+
+    <!-- BOTTOM STEPPER NAV -->
+    <div class="bottom-nav-bar">
+      <a href="ifttt-automation.html" class="btn btn-outline">← Previous: Task 3 — IFTTT Automation</a>
+      <a href="index.html" class="btn btn-outline">IoT Hub Overview</a>
+      <a href="firebase-logging.html" class="btn btn-primary">Next: Task 5 — Firebase Logging & Data Export →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Pranav S · B.E. Mechatronics Engineering · IoT Portfolio Assignment Series
+  </div>
+</footer>
+
+</body>
+</html>
+

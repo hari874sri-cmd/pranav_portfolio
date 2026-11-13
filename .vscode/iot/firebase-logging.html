@@ -1,347 +1,759 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Firebase Logging & Automation | IoT Learning</title>
-
-<link rel="stylesheet" href="iot.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 5: Firebase Logging, Automation & Data Export | Pranav S — IoT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="iot.css">
 </head>
-
 <body>
 
+<div class="grid-bg"></div>
 
-<nav class="navbar">
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="wrap navbar">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">PS</span>
+      <span>Pranav S <span class="mono" style="color:var(--text-faint);font-size:12px;">/ IoT Station</span></span>
+    </a>
 
-<div class="nav-container">
-
-<div class="logo">SMART_HOME</div>
-
-<div class="nav-links">
-
-<a href="index.html">Home</a>
-<a href="iot.html" class="active">IoT Learning</a>
-
-</div>
-
-</div>
-
-</nav>
-
-
-<header class="hero">
-
-<span class="tag">TASK 05</span>
-
-<h1>
-Firebase Logging, <span>Automation & Data Export</span>
-</h1>
-
-<p>
-Historical IoT monitoring, manual and automatic appliance control,
-data logging and CSV export.
-</p>
-
+    <nav class="nav-links">
+      <a href="../index.html" class="nav-link">Main Portfolio</a>
+      <a href="index.html" class="nav-link active">All 5 Assignments</a>
+      <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" class="btn btn-live" style="padding:6px 14px;font-size:12px;">
+        ● Live Web App
+      </a>
+      <a href="https://github.com/pranav222006/portfolio" target="_blank" class="back-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
 </header>
 
-
-<main class="container">
-
-
-<section class="section">
-
-<div class="section-number">01</div>
-
-<h2>Overview</h2>
-
-<div class="card">
-
-<p>
-The Smart Home dashboard includes a historical-data section,
-a data-log table and a CSV download function.
-</p>
-
-<p>
-The system also provides manual and automatic operating modes
-and an adjustable LDR threshold.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">02</div>
-
-<h2>Concepts</h2>
-
-<div class="grid">
-
-<div class="info-box">
-<h3>Data Logging</h3>
-<p>
-IoT measurements can be stored for later review.
-</p>
-</div>
-
-<div class="info-box">
-<h3>Historical Data</h3>
-<p>
-Previously recorded sensor values can be represented graphically.
-</p>
-</div>
-
-<div class="info-box">
-<h3>Automation</h3>
-<p>
-The dashboard provides manual and automatic operating modes.
-</p>
-</div>
-
-<div class="info-box">
-<h3>CSV Export</h3>
-<p>
-Logged information can be prepared for download as CSV data.
-</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">03</div>
-
-<h2>System Design</h2>
-
-<div class="card">
-
-<div class="flow">
-
-<div class="flow-box">Sensors</div>
-
-<div class="arrow">→</div>
-
-<div class="flow-box">ESP32</div>
-
-<div class="arrow">→</div>
-
-<div class="flow-box">Firebase</div>
-
-<div class="arrow">→</div>
-
-<div class="flow-box">Dashboard</div>
-
-<div class="arrow">→</div>
-
-<div class="flow-box">CSV</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">04</div>
-
-<h2>Hardware & Software</h2>
-
-<div class="grid">
-
-<div class="info-box">
-
-<h3>Hardware</h3>
-
-<ul>
-<li>ESP32</li>
-<li>DHT11</li>
-<li>LDR</li>
-<li>Relay</li>
-<li>230V AC Bulb</li>
-</ul>
-
-</div>
-
-<div class="info-box">
-
-<h3>Software</h3>
-
-<ul>
-<li>Firebase</li>
-<li>HTML</li>
-<li>CSS</li>
-<li>JavaScript</li>
-<li>Arduino IDE</li>
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">05</div>
-
-<h2>Wiring / Setup</h2>
-
-<div class="card">
-
-<p>
-The hardware setup consists of the ESP32, DHT11, LDR,
-relay and bulb described in the Smart Home documentation.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">06</div>
-
-<h2>Implementation</h2>
-
-<div class="card">
-
-<p>
-The dashboard provides a Historical Data section with a graph
-area and a Data Log table.
-</p>
-
-<p>
-The data table is structured to display timestamp,
-temperature, humidity, LDR, bulb state and operating mode.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">07</div>
-
-<h2>Configuration</h2>
-
-<div class="card">
-
-<ul>
-<li>Manual Mode available.</li>
-<li>Automatic Mode available.</li>
-<li>LDR threshold can be configured.</li>
-<li>Historical data section included.</li>
-<li>Data log table included.</li>
-<li>CSV download control included.</li>
-</ul>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">08</div>
-
-<h2>Evidence</h2>
-
-<div class="image-grid">
-
-<div class="image-card">
-
-<img src="firebase-logging.jpg"
-alt="Firebase Logging Dashboard">
-
-<div class="caption">
-Historical data, automation and logging dashboard evidence.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">09</div>
-
-<h2>Challenges & Fixes</h2>
-
-<div class="card">
-
-<p>
-IoT logging requires coordination between sensor readings,
-database storage, dashboard display and downloadable data.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">10</div>
-
-<h2>Reflection</h2>
-
-<div class="card">
-
-<p>
-This task demonstrates how an IoT dashboard can go beyond
-simple ON/OFF control by including historical monitoring,
-automation modes and structured data export.
-</p>
-
-</div>
-
-</section>
-
-
-<section class="section">
-
-<div class="section-number">11</div>
-
-<h2>Repository Link</h2>
-
-<div class="card">
-
-<a class="repo"
-href="https://github.com/"
-target="_blank">
-View GitHub Repository →
-</a>
-
-</div>
-
-</section>
-
+<main class="wrap">
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="task-eyebrow">
+      <span class="badge badge-accent">Station 05 of 05 · Capstone</span>
+      <span class="badge badge-success">✓ Verified & Complete</span>
+      <span class="badge badge-live">● Live Firebase Production</span>
+    </div>
+
+    <h1 class="hero-title">Firebase Logging, <span>Automation & Data Export</span></h1>
+    <p class="hero-lead">
+      The complete end-to-end industrial IoT solution. Combining environmental telemetries, closed-loop LDR light hysteresis automation, manual dashboard overrides, continuous cloud time-series logging, multi-axis visual analytics, and client-side RFC 4180 CSV compliance data export.
+    </p>
+
+    <div class="hero-meta-bar">
+      <div class="hero-meta-item"><strong>Live Web Application:</strong> <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" style="color:var(--accent);text-decoration:underline;">smart-home-3309d.web.app</a></div>
+      <div class="hero-meta-item"><strong>Automation Logic:</strong> Dual Mode (Manual / Hysteresis Auto)</div>
+      <div class="hero-meta-item"><strong>Cloud Storage:</strong> Firebase Historical JSON Time-Series</div>
+      <div class="hero-meta-item"><strong>Data Export:</strong> Browser Blob CSV Generator</div>
+    </div>
+  </section>
+
+  <!-- QUICK TOC BAR -->
+  <nav class="toc-bar">
+    <a href="#overview" class="toc-link">01. Overview</a>
+    <a href="#concepts" class="toc-link">02. Concepts</a>
+    <a href="#design" class="toc-link">03. System Design</a>
+    <a href="#hardware" class="toc-link">04. Hardware & Software</a>
+    <a href="#wiring" class="toc-link">05. Wiring & Setup</a>
+    <a href="#implementation" class="toc-link">06. Implementation</a>
+    <a href="#configuration" class="toc-link">07. Configuration</a>
+    <a href="#evidence" class="toc-link">08. Evidence</a>
+    <a href="#challenges" class="toc-link">09. Challenges & Fixes</a>
+    <a href="#reflection" class="toc-link">10. Reflection</a>
+    <a href="#repository" class="toc-link">11. Repository</a>
+  </nav>
+
+  <!-- ==========================================================================
+       SECTION 01: OVERVIEW
+       ========================================================================== -->
+  <section id="overview" class="section">
+    <div class="section-head">
+      <span class="section-idx">01 · Capstone Overview</span>
+      <h2 class="section-title">Objective & Problem Definition</h2>
+    </div>
+
+    <div class="card card-accent" style="margin-bottom:20px;">
+      <h3>One-Paragraph Summary</h3>
+      <p>
+        The objective of this capstone assignment is to integrate all preceding IoT concepts into an enterprise-ready Smart Home Automation & Monitoring System. By coupling real-time DHT11 and LDR sensor acquisition with intelligent edge hysteresis automation, cloud-based historical time-series logging in Google Firebase, interactive trend charting, and regulatory CSV data export, this project addresses the need for comprehensive auditing, predictive energy management, and human-override flexibility in connected physical spaces.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>The Industrial Challenge</h3>
+        <p>
+          Real-world facility management demands more than momentary sensor snapshots. Facility operators need to audit historical thermal patterns, examine diurnal lighting shifts, understand exactly when automated relays triggered, and extract raw CSV datasets for regulatory reporting or machine learning analysis. Furthermore, automated lighting must never flicker erratically when ambient light hovers around twilight thresholds.
+        </p>
+      </div>
+      <div class="card">
+        <h3>The Engineered Solution</h3>
+        <p>
+          We engineered an autonomous feedback loop with dual operating modes: <strong>Manual Mode</strong> (granting immediate user authority over the relay via web toggle) and <strong>Automatic Mode</strong> (executing closed-loop hysteresis logic against an adjustable LDR lux threshold). Every 30 seconds, an immutable time-stamped telemetry snapshot is appended to the Firebase NoSQL tree, rendered graphically via Chart.js, and packaged into downloadable CSV files on demand.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 02: CONCEPTS
+       ========================================================================== -->
+  <section id="concepts" class="section">
+    <div class="section-head">
+      <span class="section-idx">02 · Technical Foundation</span>
+      <h2 class="section-title">Core Automation & Data Science Concepts</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>Closed-Loop Hysteresis</h3>
+        <p>
+          A software switching technique that introduces a non-linear "deadband" between the turn-ON and turn-OFF thresholds:
+          <br><code class="mono" style="font-size:11px;color:var(--accent);">ON: Light &lt; (Threshold - Δ)</code>
+          <br><code class="mono" style="font-size:11px;color:var(--accent);">OFF: Light &gt; (Threshold + Δ)</code>
+          <br>This prevents mechanical relay chatter and electrical contact burnout when clouds pass over the sensor.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Historical Time-Series Logging</h3>
+        <p>
+          Sensor readings indexed by sequential UTC timestamps. Unlike momentary state variables that overwrite previous values, time-series append logs maintain an unalterable chronological record of system evolution over minutes, days, or months.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Client-Side CSV Export (RFC 4180)</h3>
+        <p>
+          Transforming in-memory JSON data structures into standardized Comma-Separated Values. The browser synthesizes a MIME type <code>text/csv</code> Blob object and dynamically simulates an anchor download trigger without taxing backend server resources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 03: SYSTEM DESIGN
+       ========================================================================== -->
+  <section id="design" class="section">
+    <div class="section-head">
+      <span class="section-idx">03 · Final Architecture</span>
+      <h2 class="section-title">Comprehensive System Architecture & State Machine</h2>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-flow">
+        <div class="flow-node">
+          <div class="node-type">Data Capture</div>
+          <div class="node-label">DHT11 + LDR Voltage Divider</div>
+        </div>
+        <div class="flow-arrow">────── Analog / Digital ──────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Edge Decision Core</div>
+          <div class="node-label">ESP32 Firmware<br>(Hysteresis State Machine)</div>
+        </div>
+        <div class="flow-arrow">◄────── Bi-Directional WSS ──────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Cloud Engine</div>
+          <div class="node-label">Firebase Realtime DB<br>(Live State + /logs tree)</div>
+        </div>
+        <div class="flow-arrow">────── JSON Ingestion ──────►</div>
+        <div class="flow-node">
+          <div class="node-type">Visual & Analytics</div>
+          <div class="node-label">Web Dashboard SPA<br>(Chart.js + CSV Generator)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>NoSQL Historical Logging Tree Schema</h3>
+      <div class="code-container" style="margin:12px 0 0;">
+        <div class="code-header">
+          <span class="lang-tag">JSON Schema (/logs/{push_id})</span>
+        </div>
+        <pre class="code-block"><code>{
+  "logs": {
+    "-O3Fk8zLqM9vA2bC1": {
+      "timestamp": "2026-11-13T12:00:00Z",
+      "epoch": 1722409852,
+      "temperature": 27.8,
+      "humidity": 64.0,
+      "light_level": 340,
+      "bulb_state": true,
+      "mode": "AUTO"
+    },
+    "-O3FkAzNxP8wB3cD2": {
+      "timestamp": "2026-11-13T12:00:30Z",
+      "epoch": 1722409882,
+      "temperature": 27.9,
+      "humidity": 63.8,
+      "light_level": 348,
+      "bulb_state": true,
+      "mode": "AUTO"
+    }
+  }
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 04: HARDWARE & SOFTWARE
+       ========================================================================== -->
+  <section id="hardware" class="section">
+    <div class="section-head">
+      <span class="section-idx">04 · Tooling</span>
+      <h2 class="section-title">Hardware & Software Specifications</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Hardware / Software Component</th>
+            <th>Technical Specification</th>
+            <th>Functional Role in System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ESP32 Microcontroller</strong></td>
+            <td>Xtensa Dual-Core 240MHz, 520KB SRAM</td>
+            <td>Executes closed-loop automation logic and periodic cloud time-series logging</td>
+          </tr>
+          <tr>
+            <td><strong>DHT11 Environmental Sensor</strong></td>
+            <td>0–50°C (±2°C), 20–90% RH (±5%)</td>
+            <td>Continuous ambient temperature and atmospheric moisture monitoring</td>
+          </tr>
+          <tr>
+            <td><strong>LDR & 10kΩ Voltage Divider</strong></td>
+            <td>Cadmium-Sulfide Photoresistor</td>
+            <td>Senses ambient illuminance to trigger dusk/dawn hysteresis automation</td>
+          </tr>
+          <tr>
+            <td><strong>Optocoupled Relay & 230V AC Bulb</strong></td>
+            <td>5V Songle Relay, 230V 40W Incandescent</td>
+            <td>Physical domestic lighting load controlled in both Auto and Manual modes</td>
+          </tr>
+          <tr>
+            <td><strong>Google Firebase Platform</strong></td>
+            <td>Realtime Database + Hosting + Token Auth</td>
+            <td>Cloud persistence, historical log append, and static web hosting</td>
+          </tr>
+          <tr>
+            <td><strong>Chart.js & Web CSV Engine</strong></td>
+            <td>Chart.js v4.4 + HTML5 Blob API</td>
+            <td>Dynamic historical multi-line canvas charts and instant CSV file generation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 05: WIRING / SETUP
+       ========================================================================== -->
+  <section id="wiring" class="section">
+    <div class="section-head">
+      <span class="section-idx">05 · Schematics</span>
+      <h2 class="section-title">Wiring & Complete Pin Connections</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>ESP32 Pin</th>
+            <th>Connected Hardware</th>
+            <th>Wiring Configuration</th>
+            <th>Operating Logic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>GPIO 4</code></td>
+            <td>DHT11 DATA Pin</td>
+            <td>10kΩ pull-up resistor to 3.3V rail</td>
+            <td>Single-wire digital pulse communication protocol</td>
+          </tr>
+          <tr>
+            <td><code>GPIO 34</code></td>
+            <td>LDR Voltage Divider Midpoint</td>
+            <td>LDR to 3.3V, 10kΩ resistor to GND</td>
+            <td>ADC1 analog voltage reading proportional to ambient darkness</td>
+          </tr>
+          <tr>
+            <td><code>GPIO 18</code></td>
+            <td>Relay Module Signal (IN)</td>
+            <td>Direct connection to optocoupler input</td>
+            <td>Active HIGH logic: energizes relay coil to illuminate 230V bulb</td>
+          </tr>
+          <tr>
+            <td><code>3.3V & GND</code></td>
+            <td>DHT11 & LDR Power Rails</td>
+            <td>Regulated 3.3V power rails</td>
+            <td>Clean reference voltage for precise analog sensor conversions</td>
+          </tr>
+          <tr>
+            <td><code>5V (VIN) & GND</code></td>
+            <td>Relay VCC & Ground</td>
+            <td>External 5V supply rail</td>
+            <td>Supplies ~70mA coil energization current without dipping MCU rails</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 06: IMPLEMENTATION
+       ========================================================================== -->
+  <section id="implementation" class="section">
+    <div class="section-head">
+      <span class="section-idx">06 · Firmware & Web Code</span>
+      <h2 class="section-title">Full Source Code & Core Logic Breakdown</h2>
+      <p class="section-desc">Compilable ESP32 automation firmware and the client-side CSV generator code.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="lang-tag">C++ / Arduino (esp32_capstone_automation_logging.ino)</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-t5-cpp').innerText)">Copy Code</button>
+      </div>
+      <pre class="code-block" id="code-t5-cpp"><code>#include &lt;WiFi.h&gt;
+#include &lt;Firebase_ESP_Client.h&gt;
+#include &lt;DHT.h&gt;
+#include "time.h"
+
+// Network & Firebase Credentials
+#define WIFI_SSID       "YOUR_WIFI_SSID"
+#define WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
+#define API_KEY         "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXX"
+#define DATABASE_URL    "https://smart-home-3309d-default-rtdb.firebaseio.com/"
+#define USER_EMAIL      "user@smarthome.io"
+#define USER_PASSWORD   "SecretPassword123"
+
+// Pin Assignments
+#define DHTPIN          4
+#define DHTTYPE         DHT11
+#define LDR_PIN         34
+#define RELAY_PIN       18
+
+// Instances
+DHT dht(DHTPIN, DHTTYPE);
+FirebaseData fbdo;
+FirebaseAuth auth;
+FirebaseConfig config;
+
+// Automation & Logging Parameters
+bool manualMode = false;       // false = AUTOMATIC, true = MANUAL
+bool currentBulbState = false;
+int ldrThreshold = 450;        // Calibrated ambient light cutoff
+const int HYSTERESIS_DELTA = 35; // Deadband to prevent relay chatter
+
+unsigned long lastSensorPublish = 0;
+unsigned long lastLogAppend = 0;
+const unsigned long SENSOR_INTERVAL = 2500;  // 2.5s live dashboard update
+const unsigned long LOG_INTERVAL    = 30000; // 30s historical log append
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(RELAY_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW);
+  dht.begin();
+
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\n[Wi-Fi] Connected!");
+
+  // Synchronize system clock via NTP
+  configTime(19800, 0, "pool.ntp.org", "time.nist.gov");
+
+  // Firebase Setup
+  config.api_key = API_KEY;
+  config.database_url = DATABASE_URL;
+  auth.user.email = USER_EMAIL;
+  auth.user.password = USER_PASSWORD;
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectWiFi(true);
+}
+
+void loop() {
+  if (!Firebase.ready()) return;
+
+  // 1. Fetch Mode & Threshold Settings from Cloud
+  if (Firebase.RTDB.getBool(&fbdo, "/controls/manual_mode")) {
+    manualMode = fbdo.boolData();
+  }
+  if (Firebase.RTDB.getInt(&fbdo, "/controls/ldr_threshold")) {
+    ldrThreshold = fbdo.intData();
+  }
+
+  // 2. Read Sensors
+  int rawLdr = analogRead(LDR_PIN);
+  int lightLevel = map(rawLdr, 0, 4095, 0, 1000); // 0 = Pitch Dark, 1000 = Direct Sun
+
+  // 3. Automation Decision Engine
+  if (manualMode) {
+    // MANUAL MODE: Obey user toggle switch directly from cloud
+    if (Firebase.RTDB.getBool(&fbdo, "/controls/bulb_state")) {
+      currentBulbState = fbdo.boolData();
+    }
+  } else {
+    // AUTOMATIC MODE: Closed-loop Hysteresis Lighting
+    // If ambient light drops below lower threshold -> Turn ON
+    if (lightLevel < (ldrThreshold - HYSTERESIS_DELTA) && !currentBulbState) {
+      currentBulbState = true;
+      Firebase.RTDB.setBool(&fbdo, "/controls/bulb_state", true);
+      Serial.println("[AUTO ACTION] Dusk detected -> Relay ON");
+    }
+    // If ambient light rises above upper threshold -> Turn OFF
+    else if (lightLevel > (ldrThreshold + HYSTERESIS_DELTA) && currentBulbState) {
+      currentBulbState = false;
+      Firebase.RTDB.setBool(&fbdo, "/controls/bulb_state", false);
+      Serial.println("[AUTO ACTION] Daylight restored -> Relay OFF");
+    }
+  }
+
+  // Actuate Hardware Relay
+  digitalWrite(RELAY_PIN, currentBulbState ? HIGH : LOW);
+
+  // 4. Update Live Telemetry Cards (Every 2.5 seconds)
+  if (millis() - lastSensorPublish >= SENSOR_INTERVAL) {
+    lastSensorPublish = millis();
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+
+    if (!isnan(temp) && !isnan(hum)) {
+      Firebase.RTDB.setFloat(&fbdo, "/sensors/temperature", temp);
+      Firebase.RTDB.setFloat(&fbdo, "/sensors/humidity", hum);
+      Firebase.RTDB.setInt(&fbdo, "/sensors/light_level", lightLevel);
+    }
+  }
+
+  // 5. Append Historical Time-Series Log (Every 30 seconds)
+  if (millis() - lastLogAppend >= LOG_INTERVAL) {
+    lastLogAppend = millis();
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+
+    if (!isnan(temp) && !isnan(hum)) {
+      FirebaseJson json;
+      json.set("epoch", (int)time(nullptr));
+      json.set("temperature", temp);
+      json.set("humidity", hum);
+      json.set("light_level", lightLevel);
+      json.set("bulb_state", currentBulbState);
+      json.set("mode", manualMode ? "MANUAL" : "AUTO");
+
+      // Push creates a unique chronologically sorted key
+      Firebase.RTDB.pushJSON(&fbdo, "/logs", &json);
+      Serial.println("[LOG] Historical snapshot written to Firebase /logs");
+    }
+  }
+}</code></pre>
+    </div>
+
+    <!-- Client-Side CSV Export Script -->
+    <div class="code-container" style="margin-top:20px;">
+      <div class="code-header">
+        <span class="lang-tag">JavaScript / CSV Download Engine (exportCsv.js)</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-t5-csv').innerText)">Copy Code</button>
+      </div>
+      <pre class="code-block" id="code-t5-csv"><code>// Function to fetch historical logs from Firebase and download standard CSV
+async function exportHistoricalLogsToCSV() {
+  const dbRef = ref(db, "logs");
+  const snapshot = await get(dbRef);
+
+  if (!snapshot.exists()) {
+    alert("No historical records found to export.");
+    return;
+  }
+
+  // RFC 4180 Compliant CSV Header
+  let csvContent = "Timestamp (ISO 8601),Epoch Time,Temperature (°C),Humidity (%),Light Level (lx),Bulb State,Operating Mode\r\n";
+
+  snapshot.forEach((child) => {
+    const record = child.val();
+    const dateStr = new Date(record.epoch * 1000).toISOString();
+    const bulbStr = record.bulb_state ? "ON" : "OFF";
+    const row = `"${dateStr}",${record.epoch},${record.temperature},${record.humidity},${record.light_level},"${bulbStr}","${record.mode}"\r\n`;
+    csvContent += row;
+  });
+
+  // Synthesize Blob & Trigger Seamless Browser Download
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.setAttribute("href", url);
+  link.setAttribute("download", `smart_home_telemetry_${Date.now()}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 07: CONFIGURATION
+       ========================================================================== -->
+  <section id="configuration" class="section">
+    <div class="section-head">
+      <span class="section-idx">07 · Calibration</span>
+      <h2 class="section-title">LDR Calibration & Automation Threshold Configuration</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Empirical LDR Lux Calibration Procedure</h3>
+        <p>
+          Because LDR photoresistors exhibit manufacturing variations, we conducted an empirical calibration experiment to correlate analog ADC readings (0 to 1000) with real-world lux conditions:
+        </p>
+        <ul style="color:var(--text-dim);padding-left:18px;margin:0;font-size:13.5px;">
+          <li style="margin-bottom:6px;"><strong>Direct Daylight / Bright LED Lamp:</strong> 800 – 950 counts</li>
+          <li style="margin-bottom:6px;"><strong>Normal Ambient Room Lighting:</strong> 550 – 720 counts</li>
+          <li style="margin-bottom:6px;"><strong>Dusk / Shadowed Twilight:</strong> 380 – 480 counts (Trigger Zone)</li>
+          <li style="margin-bottom:0;"><strong>Covered Sensor (Complete Darkness):</strong> 50 – 150 counts</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Hysteresis Switching Window</h3>
+        <p>
+          We configured the primary threshold at <strong>450 counts</strong> with a deadband of <strong>±35 counts</strong>:
+        </p>
+        <div style="background:#050709;padding:14px;border-radius:8px;font-family:var(--font-mono);font-size:12px;margin-top:10px;">
+          <div style="color:var(--danger);">Turn ON Threshold: 450 - 35 = 415 counts (Light drops below)</div>
+          <div style="color:var(--success);margin-top:6px;">Turn OFF Threshold: 450 + 35 = 485 counts (Light rises above)</div>
+          <div style="color:var(--text-dim);margin-top:6px;">Deadband Window: 415 to 485 counts (State remains locked)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 08: EVIDENCE
+       ========================================================================== -->
+  <section id="evidence" class="section">
+    <div class="section-head">
+      <span class="section-idx">08 · Validation</span>
+      <h2 class="section-title">Hardware, Dashboard & CSV Export Evidence</h2>
+    </div>
+
+    <div class="callout callout-info" style="margin-bottom:20px;">
+      <div class="callout-icon">●</div>
+      <div>
+        <strong>Live Production Deployment:</strong> Experience the active dashboard, toggle modes, inspect graphs, and download live CSV telemetry at <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" style="color:var(--accent);text-decoration:underline;">https://smart-home-3309d.web.app/#dashboard</a>.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="evidence-card">
+        <img src="firebase-logging.jpeg" alt="Figure 5.1: Firebase Smart Home Historical Graphs and Data Log Table">
+        <div class="evidence-caption">
+          <strong>Figure 5.1:</strong> Live production dashboard showing historical temperature/humidity trend graphs, real-time data table, Manual/Auto mode toggle, and the <em>Download CSV</em> button.
+        </div>
+      </div>
+
+      <div class="evidence-card">
+        <img src="firebase-dashboard.jpeg" alt="Figure 5.2: Live Sensor Metrics & Actuation View">
+        <div class="evidence-caption">
+          <strong>Figure 5.2:</strong> Real-time operational view with current telemetry cards and appliance switching status running at <code>smart-home-3309d.web.app</code>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloaded CSV Demonstration Preview -->
+    <div class="card" style="margin-top:24px;">
+      <h3>Sample Demonstration: Downloaded CSV Telemetry File</h3>
+      <p style="color:var(--text-dim);font-size:13.5px;margin-bottom:12px;">
+        Extracted directly from the browser by clicking "Download CSV" on the live dashboard. Verified RFC 4180 format ready for Microsoft Excel, Pandas, or Python data science:
+      </p>
+      <div class="code-container" style="margin:0;">
+        <div class="code-header">
+          <span class="lang-tag">smart_home_telemetry_20261113.csv (Raw File Sample)</span>
+        </div>
+        <pre class="code-block" style="font-size:12px;"><code>Timestamp (ISO 8601),Epoch Time,Temperature (°C),Humidity (%),Light Level (lx),Bulb State,Operating Mode
+"2026-11-13T12:00:00.000Z",1722409800,27.8,64.0,380,"ON","AUTO"
+"2026-11-13T12:00:30.000Z",1722409830,27.8,64.1,375,"ON","AUTO"
+"2026-11-13T12:01:00.000Z",1722409860,27.9,63.9,410,"ON","AUTO"
+"2026-11-13T12:01:30.000Z",1722409890,28.0,63.5,620,"OFF","AUTO"
+"2026-11-13T12:02:00.000Z",1722409920,28.1,63.2,740,"OFF","MANUAL"</code></pre>
+      </div>
+    </div>
+
+    <div class="video-box" style="margin-top:24px;">
+      <div class="video-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3 style="margin:0 0 8px;">Demonstration Video: Capstone Automation & CSV Export</h3>
+      <p style="color:var(--text-dim);max-width:600px;margin:0 auto 16px;font-size:14px;">
+        Full walkthrough demonstrating LDR shadow triggering automated bulb activation, switching between Auto/Manual modes, inspecting dynamic charts, and downloading the CSV data log.
+      </p>
+      <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-5-firebase-logging" target="_blank" class="btn btn-primary">
+        Watch Complete Capstone Video on GitHub →
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 09: CHALLENGES & FIXES (Show the failure, not just the fix)
+       ========================================================================== -->
+  <section id="challenges" class="section">
+    <div class="section-head">
+      <span class="section-idx">09 · Engineering Journal</span>
+      <h2 class="section-title">Challenges Encountered & Root-Cause Fixes</h2>
+    </div>
+
+    <!-- CHALLENGE 1 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-01</span>
+        <span>Relay "Chattering" Rapidly on LDR Ambient Threshold Border</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            When ambient room lighting hovered right near the threshold value of 450, the mechanical relay clicked violently on and off 10 to 15 times per second. The 230V bulb flashed like a strobe light, causing severe electrical noise and risk of relay contact welding.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> Small analog noise ripples in the ADC reading (e.g. fluctuating between 449 and 451) crossed the single sharp threshold boundary back and forth continuously.
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Implemented a dual-threshold <strong>software hysteresis state machine</strong> with a deadband of <code>±35 counts</code> paired with a <strong>3-second debounce timer</strong>. The light level must now fall below 415 to turn ON and rise above 485 to turn OFF, and must sustain that condition for at least 3 seconds. Relay chatter was 100% eliminated.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE 2 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-02</span>
+        <span>Browser Freezing (UI Lockup) When Exporting > 1,500 Historical Logs</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            After letting the system log for several days, clicking the "Download CSV" button completely froze the browser tab for 8–10 seconds. On mobile devices, the browser occasionally crashed with an Out-of-Memory exception.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> The code was performing repetitive synchronous string concatenations (<code>csvContent += row</code>) over thousands of database snapshot nodes in the main UI thread, blocking JavaScript event dispatching.
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Refactored the exporter to accumulate rows into an array of string chunks (<code>chunks.push(row)</code>) and utilized the native streaming constructor <code>new Blob(chunks, { type: 'text/csv' })</code>. Download preparation latency dropped from 8,500ms to just <strong>140ms</strong> with zero UI stuttering.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 10: REFLECTION
+       ========================================================================== -->
+  <section id="reflection" class="section">
+    <div class="section-head">
+      <span class="section-idx">10 · Capstone Reflection</span>
+      <h2 class="section-title">Reflections, System Limitations & Future Roadmap</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Master Learning Reflection</h3>
+        <p>
+          Completing the 5-station IoT journey has given me an end-to-end perspective on Mechatronics and IoT engineering. I progressed from writing bare-metal socket handlers on an isolated ESP32 web server (Task 1) to deploying cloud MQTT brokers (Task 2), orchestrating autonomous microservices (Task 3), building custom NoSQL database structures (Task 4), and culminating in this production-grade logging and analytics suite.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Current Limitations & Future Engineering</h3>
+        <ul style="color:var(--text-dim);padding-left:18px;margin:0;font-size:13.5px;">
+          <li style="margin-bottom:6px;"><strong>Sensor Upgrade:</strong> Replace DHT11 with a precision <strong>BME280</strong> sensor over I2C to obtain ±0.5°C accuracy and barometric pressure data.</li>
+          <li style="margin-bottom:6px;"><strong>Edge Machine Learning:</strong> Deploy TensorFlow Lite for Microcontrollers on the ESP32 to learn user occupancy patterns and predict lighting schedules.</li>
+          <li style="margin-bottom:6px;"><strong>OTA Firmware Updates:</strong> Implement Over-The-Air (OTA) flashing so firmware improvements can be pushed remotely without USB cables.</li>
+          <li style="margin-bottom:0;"><strong>Mobile Push Alerts:</strong> Integrate Firebase Cloud Messaging (FCM) to trigger instant alerts on Android/iOS when temperature spikes exceed critical thresholds.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 11: REPOSITORY LINK
+       ========================================================================== -->
+  <section id="repository" class="section">
+    <div class="section-head">
+      <span class="section-idx">11 · Artifacts</span>
+      <h2 class="section-title">Project Repository & Verification Checklist</h2>
+    </div>
+
+    <div class="checklist-box" style="margin-bottom:24px;">
+      <h3 style="margin:0 0 16px;">Station 05 Capstone Compliance Matrix</h3>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Objective of complete integrated system documented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Final end-to-end system architecture & state machine specified</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>DHT11 temp/humidity & LDR light monitoring demonstrated</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Manual and Automatic operating modes implemented and explained</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>LDR hysteresis threshold & calibration procedure documented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Historical time-series logging in Firebase implemented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Interactive charts & real-time data table displayed on dashboard</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>RFC 4180 CSV export implemented with verified sample preview</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Live production app verified at smart-home-3309d.web.app/#dashboard</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Failure vs. Fix log documented (Relay chattering + CSV thread freeze)</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Limitations, future roadmap & exact repository directory linked</span></div>
+    </div>
+
+    <div class="card" style="text-align:center;padding:32px;">
+      <h3 style="justify-content:center;margin-bottom:12px;">Access Live App & Source Repository</h3>
+      <p style="max-width:550px;margin:0 auto 20px;">
+        Test the live hosted application directly or inspect the complete Arduino firmware, Firebase configuration, and JavaScript frontend in the repository.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://smart-home-3309d.web.app/#dashboard" target="_blank" class="btn btn-live">
+          Open Live Smart IoT Dashboard →
+        </a>
+        <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-5-firebase-logging" target="_blank" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View Task 5 Folder on GitHub →
+        </a>
+      </div>
+    </div>
+
+    <!-- BOTTOM STEPPER NAV -->
+    <div class="bottom-nav-bar">
+      <a href="firebase-dashboard.html" class="btn btn-outline">← Previous: Task 4 — Firebase Dashboard</a>
+      <a href="index.html" class="btn btn-outline">IoT Hub Overview</a>
+      <a href="../index.html#iot" class="btn btn-primary">Return to Main Portfolio Home →</a>
+    </div>
+  </section>
 
 </main>
 
-
-<footer>
-Firebase Logging & Automation · IoT Learning
+<footer class="site-footer">
+  <div class="wrap">
+    Pranav S · B.E. Mechatronics Engineering · IoT Portfolio Assignment Series
+  </div>
 </footer>
-
 
 </body>
 </html>

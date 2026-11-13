@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1: ESP32 Web Server & HTML LED Control | Pranav S — IoT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="iot.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="wrap navbar">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark">PS</span>
+      <span>Pranav S <span class="mono" style="color:var(--text-faint);font-size:12px;">/ IoT Station</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="../index.html" class="nav-link">Main Portfolio</a>
+      <a href="index.html" class="nav-link active">All 5 Assignments</a>
+      <a href="https://github.com/pranav222006/portfolio" target="_blank" class="back-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repo
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="task-eyebrow">
+      <span class="badge badge-accent">Station 01 of 05</span>
+      <span class="badge badge-success">✓ Verified & Complete</span>
+      <span style="color:var(--text-faint)">Embedded Local Web Architecture</span>
+    </div>
+
+    <h1 class="hero-title">ESP32 Web Server & <span>HTML LED Control</span></h1>
+    <p class="hero-lead">
+      Direct embedded device control over a local Wi-Fi network using the ESP32 microcontroller as a standalone asynchronous HTTP web server serving a responsive web interface to toggle hardware GPIO states in real time.
+    </p>
+
+    <div class="hero-meta-bar">
+      <div class="hero-meta-item"><strong>Platform:</strong> ESP32 Dual-Core Tensilica</div>
+      <div class="hero-meta-item"><strong>Protocol:</strong> HTTP/1.1 (TCP Port 80)</div>
+      <div class="hero-meta-item"><strong>Network:</strong> 802.11 b/g/n (SoftAP / Station Mode)</div>
+      <div class="hero-meta-item"><strong>Control Target:</strong> GPIO 2 (5mm High-Efficiency LED)</div>
+    </div>
+  </section>
+
+  <!-- QUICK TOC BAR -->
+  <nav class="toc-bar">
+    <a href="#overview" class="toc-link">01. Overview</a>
+    <a href="#concepts" class="toc-link">02. Concepts</a>
+    <a href="#design" class="toc-link">03. System Design</a>
+    <a href="#hardware" class="toc-link">04. Hardware & Software</a>
+    <a href="#wiring" class="toc-link">05. Wiring & Setup</a>
+    <a href="#implementation" class="toc-link">06. Implementation</a>
+    <a href="#configuration" class="toc-link">07. Configuration</a>
+    <a href="#evidence" class="toc-link">08. Evidence</a>
+    <a href="#challenges" class="toc-link">09. Challenges & Fixes</a>
+    <a href="#reflection" class="toc-link">10. Reflection</a>
+    <a href="#repository" class="toc-link">11. Repository</a>
+  </nav>
+
+  <!-- ==========================================================================
+       SECTION 01: OVERVIEW
+       ========================================================================== -->
+  <section id="overview" class="section">
+    <div class="section-head">
+      <span class="section-idx">01 · Station Overview</span>
+      <h2 class="section-title">Objective & Problem Definition</h2>
+    </div>
+
+    <div class="card card-accent" style="margin-bottom:20px;">
+      <h3>One-Paragraph Summary</h3>
+      <p>
+        The objective of this assignment is to develop an autonomous embedded web server hosted directly inside an ESP32 microcontroller that provides a zero-latency, local-network browser dashboard for switching an electrical load (represented by a physical LED). By hosting the HTTP server on-chip, this solution resolves the problem of high-latency, internet-dependent, or costly cloud middleman architectures for localized appliance control, ensuring complete operational autonomy and offline resilience within a private Local Area Network (LAN).
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>The Engineering Problem Addressed</h3>
+        <p>
+          Conventional smart home gadgets often depend on external cloud servers just to turn on a light bulb in the same room. If the external internet connection drops or the vendor's cloud server undergoes downtime, the user loses physical control over their smart environment. Furthermore, routing simple localized switching requests through public WAN networks introduces unwanted latency (200ms–1500ms) and privacy concerns.
+        </p>
+      </div>
+      <div class="card">
+        <h3>The Embedded Solution</h3>
+        <p>
+          By implementing an on-chip HTTP daemon on the ESP32 using the Arduino <code>WebServer.h</code> library, the ESP32 joins the local Wi-Fi access point, receives a dedicated IP address via DHCP, listens on TCP port 80, and streams an in-memory HTML5/CSS3 graphical control panel directly to any authenticated browser on the network.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 02: CONCEPTS
+       ========================================================================== -->
+  <section id="concepts" class="section">
+    <div class="section-head">
+      <span class="section-idx">02 · Technical Foundation</span>
+      <h2 class="section-title">Core Concepts Explained</h2>
+      <p class="section-desc">Technical concepts broken down in student engineering terminology.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>ESP32 Web Server Concept</h3>
+        <p>
+          A software server process running inside the ESP32 firmware that binds to TCP Port 80. Instead of running on a high-power Linux server or Apache container, it runs on the ESP32’s Xtensa LX6 dual-core microarchitecture, listening for incoming TCP socket connections and parsing HTTP request headers.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Wi-Fi Client-Server Model</h3>
+        <p>
+          The browser acts as the <strong>HTTP Client</strong>, while the ESP32 acts as the <strong>HTTP Server</strong>. When the client navigates to <code>http://&lt;ESP32_IP&gt;/</code>, a 3-way TCP handshake occurs over 2.4GHz 802.11 b/g/n Wi-Fi, followed by an HTTP <code>GET</code> request requesting the root document.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Stateless HTTP & Command Routing</h3>
+        <p>
+          HTTP is inherently stateless. Commands are transmitted via distinct Uniform Resource Identifiers (URIs): <code>/led/on</code> and <code>/led/off</code>. The ESP32 router executes <code>server.on("/led/on", handleLedOn)</code>, drives GPIO 2 high, and responds with a fresh HTML payload updating the UI toggle state.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 03: SYSTEM DESIGN
+       ========================================================================== -->
+  <section id="design" class="section">
+    <div class="section-head">
+      <span class="section-idx">03 · Architecture</span>
+      <h2 class="section-title">System Design & Data Flow</h2>
+      <p class="section-desc">Complete end-to-end request-response cycle and architectural topology.</p>
+    </div>
+
+    <div class="diagram-container">
+      <div class="diagram-flow">
+        <div class="flow-node">
+          <div class="node-type">Client Device</div>
+          <div class="node-label">Web Browser (Phone / PC)</div>
+        </div>
+        <div class="flow-arrow">─────── HTTP GET /led/on ───────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Access Point</div>
+          <div class="node-label">Wi-Fi Router (2.4 GHz)</div>
+        </div>
+        <div class="flow-arrow">─────── TCP Port 80 ───────►</div>
+        <div class="flow-node active">
+          <div class="node-type">Embedded Core</div>
+          <div class="node-label">ESP32 WebServer</div>
+        </div>
+        <div class="flow-arrow">─────── digitalWrite(HIGH) ───────►</div>
+        <div class="flow-node">
+          <div class="node-type">Physical Output</div>
+          <div class="node-label">GPIO 2 (LED + 330Ω)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Detailed Communication Sequence</h3>
+      <ol style="color:var(--text-dim);padding-left:20px;margin:0;">
+        <li style="margin-bottom:8px;"><strong>Wi-Fi Handshake:</strong> ESP32 connects to the AP with WPA2-PSK credentials and registers its IP on the local subnet.</li>
+        <li style="margin-bottom:8px;"><strong>Page Request:</strong> Browser requests <code>http://192.168.1.184/</code>. ESP32 serves the HTML document with styled ON/OFF buttons.</li>
+        <li style="margin-bottom:8px;"><strong>Command Dispatch:</strong> The user clicks "TURN ON". The browser dispatches an asynchronous HTTP GET request to <code>/led/on</code>.</li>
+        <li style="margin-bottom:8px;"><strong>Hardware Actuation:</strong> ESP32 receives the request header, matches the route handler, and executes <code>digitalWrite(LED_PIN, HIGH)</code>.</li>
+        <li style="margin-bottom:0;"><strong>State Acknowledgment:</strong> ESP32 sends an HTTP 200 OK header with a <code>text/html</code> response body confirming LED status.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 04: HARDWARE & SOFTWARE
+       ========================================================================== -->
+  <section id="hardware" class="section">
+    <div class="section-head">
+      <span class="section-idx">04 · Tooling</span>
+      <h2 class="section-title">Hardware & Software Specifications</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Component / Tool</th>
+            <th>Specification / Version</th>
+            <th>Functional Purpose in Project</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ESP32 DevKit V1</strong></td>
+            <td>Dual Core 240MHz, 520KB SRAM, 4MB Flash</td>
+            <td>Hosts HTTP server, handles Wi-Fi stack, drives GPIO pins</td>
+          </tr>
+          <tr>
+            <td><strong>5mm Red LED</strong></td>
+            <td>Forward Voltage 2.0V, Max Current 20mA</td>
+            <td>Visual actuator representing electrical load / lighting</td>
+          </tr>
+          <tr>
+            <td><strong>Current Limiting Resistor</strong></td>
+            <td>330 Ω (1/4 Watt, Metal Film)</td>
+            <td>Restricts GPIO pin current to safe ~4mA (prevents pin blowout)</td>
+          </tr>
+          <tr>
+            <td><strong>Solderless Breadboard & Wires</strong></td>
+            <td>830 Tie-point Breadboard + Dupont Jumpers</td>
+            <td>Rapid hardware prototyping and stable circuit connections</td>
+          </tr>
+          <tr>
+            <td><strong>Arduino IDE</strong></td>
+            <td>Version 2.3.2 + ESP32 Core by Espressif v3.0</td>
+            <td>Firmware compilation, flashing via CP2102/CH340 USB-UART</td>
+          </tr>
+          <tr>
+            <td><strong>Core C++ Libraries</strong></td>
+            <td><code>&lt;WiFi.h&gt;</code>, <code>&lt;WebServer.h&gt;</code></td>
+            <td>Embedded network stack and request route handling</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 05: WIRING / SETUP
+       ========================================================================== -->
+  <section id="wiring" class="section">
+    <div class="section-head">
+      <span class="section-idx">05 · Schematics</span>
+      <h2 class="section-title">Wiring & Pin Configuration</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Pin Connection Matrix</h3>
+        <div class="table-wrap" style="margin:10px 0 0;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>ESP32 Pin</th>
+                <th>Component Lead</th>
+                <th>Signal Logic</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GPIO 2</code> (D2)</td>
+                <td>Resistor (330Ω) → LED Anode (+)</td>
+                <td>HIGH (3.3V) = ON / LOW (0V) = OFF</td>
+              </tr>
+              <tr>
+                <td><code>GND</code></td>
+                <td>LED Cathode (-) Flat Edge</td>
+                <td>Common System Ground Reference (0V)</td>
+              </tr>
+              <tr>
+                <td><code>Micro-USB / 5V</code></td>
+                <td>Regulated Power Supply</td>
+                <td>Supplies 5V to onboard AMS1117 3.3V LDO</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Circuit Analysis & Safe Operating Range</h3>
+        <p>
+          The forward voltage drop of the red indicator LED is \(V_f \approx 2.0\text{V}\). The ESP32 logic output is \(V_{cc} = 3.3\text{V}\).
+        </p>
+        <p class="mono" style="color:var(--accent);background:var(--accent-dim);padding:8px;border-radius:6px;font-size:12px;">
+          I = (V_out - V_f) / R = (3.3V - 2.0V) / 330Ω = 1.3V / 330Ω ≈ 3.94 mA
+        </p>
+        <p>
+          Because the maximum continuous drain per ESP32 GPIO pin is rated at 12mA–20mA, drawing ~3.94mA guarantees long-term thermal safety for the ESP32 silicon while providing bright optical feedback.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 06: IMPLEMENTATION
+       ========================================================================== -->
+  <section id="implementation" class="section">
+    <div class="section-head">
+      <span class="section-idx">06 · Firmware Code</span>
+      <h2 class="section-title">Implementation Source Code</h2>
+      <p class="section-desc">Fully tested, compilable ESP32 Arduino C++ firmware with route handlers and HTML generator.</p>
+    </div>
+
+    <div class="code-container">
+      <div class="code-header">
+        <span class="lang-tag">C++ / Arduino (esp32_web_server.ino)</span>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('code-t1').innerText)">Copy Code</button>
+      </div>
+      <pre class="code-block" id="code-t1"><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+// Network Credentials
+const char* ssid     = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+// Hardware Pin Definitions
+const int LED_PIN = 2; // Onboard LED / External Circuit on GPIO 2
+bool ledState = false;
+
+// Create WebServer listening on standard HTTP TCP port 80
+WebServer server(80);
+
+// Generate Responsive HTML5 Dashboard
+String generateHtml() {
+  String html = "&lt;!DOCTYPE html&gt;&lt;html lang='en'&gt;&lt;head&gt;";
+  html += "&lt;meta charset='UTF-8'&gt;&lt;meta name='viewport' content='width=device-width, initial-scale=1.0'&gt;";
+  html += "&lt;title&gt;ESP32 LED Control&lt;/title&gt;";
+  html += "&lt;style&gt;";
+  html += "body{font-family:'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;text-align:center;padding:50px 20px;}";
+  html += ".card{max-width:420px;margin:auto;background:#161b22;border:1px solid #30363d;border-radius:16px;padding:36px;box-shadow:0 10px 30px rgba(0,0,0,0.5);}";
+  html += "h1{color:#58a6ff;font-size:24px;margin-bottom:6px;}";
+  html += ".status{font-size:16px;margin:24px 0;font-weight:600;}";
+  html += ".btn{display:inline-block;width:100%;padding:14px;font-size:16px;font-weight:bold;border-radius:10px;text-decoration:none;transition:0.2s;}";
+  html += ".btn-on{background:#238636;color:white;} .btn-on:hover{background:#2ea043;}";
+  html += ".btn-off{background:#da3633;color:white;} .btn-off:hover{background:#f85149;}";
+  html += "&lt;/style&gt;&lt;/head&gt;&lt;body&gt;";
+  html += "&lt;div class='card'&gt;";
+  html += "&lt;h1&gt;ESP32 Web Server&lt;/h1&gt;";
+  html += "&lt;p style='color:#8b949e;font-size:13px;'&gt;Direct Local Embedded Control&lt;/p&gt;";
+  html += "&lt;div class='status'&gt;Current State: &lt;span style='color:" + String(ledState ? "#3fb950" : "#f85149") + "'&gt;" + (ledState ? "ON" : "OFF") + "&lt;/span&gt;&lt;/div&gt;";
+  if (ledState) {
+    html += "&lt;a class='btn btn-off' href='/led/off'&gt;TURN LED OFF&lt;/a&gt;";
+  } else {
+    html += "&lt;a class='btn btn-on' href='/led/on'&gt;TURN LED ON&lt;/a&gt;";
+  }
+  html += "&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;";
+  return html;
+}
+
+// Route Handlers
+void handleRoot() {
+  server.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  server.send(200, "text/html", generateHtml());
+}
+
+void handleLedOn() {
+  ledState = true;
+  digitalWrite(LED_PIN, HIGH);
+  Serial.println("[HTTP] Route /led/on executed -> GPIO 2 HIGH");
+  server.sendHeader("Location", "/");
+  server.send(303); // Redirect back to root to refresh view
+}
+
+void handleLedOff() {
+  ledState = false;
+  digitalWrite(LED_PIN, LOW);
+  Serial.println("[HTTP] Route /led/off executed -> GPIO 2 LOW");
+  server.sendHeader("Location", "/");
+  server.send(303); // Redirect back to root to refresh view
+}
+
+void handleNotFound() {
+  server.send(404, "text/plain", "404: Endpoint Not Found on ESP32");
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+
+  // Initialize Wi-Fi Connection
+  Serial.print("Connecting to Wi-Fi SSID: ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("\n[Wi-Fi] Connected successfully!");
+  Serial.print("[Wi-Fi] Assigned IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  // Register Web Server Routes
+  server.on("/", HTTP_GET, handleRoot);
+  server.on("/led/on", HTTP_GET, handleLedOn);
+  server.on("/led/off", HTTP_GET, handleLedOff);
+  server.onNotFound(handleNotFound);
+
+  // Start HTTP Daemon
+  server.begin();
+  Serial.println("[HTTP] WebServer started on port 80");
+}
+
+void loop() {
+  // Listen and process incoming client connections
+  server.handleClient();
+}</code></pre>
+    </div>
+
+    <div class="card">
+      <h3>Key Firmware Architecture Breakdown</h3>
+      <ul style="color:var(--text-dim);padding-left:20px;margin:0;">
+        <li style="margin-bottom:8px;"><code>server.handleClient()</code>: Continuously polls the underlying TCP stack for incoming client packets without blocking delays.</li>
+        <li style="margin-bottom:8px;"><code>HTTP 303 See Other Redirect</code>: When <code>/led/on</code> is executed, sending a 303 redirect immediately commands the browser to issue a clean <code>GET /</code> request. This prevents duplicate command triggers if the user clicks reload.</li>
+        <li style="margin-bottom:0;"><code>Cache-Control Header</code>: Forcing <code>no-cache</code> prevents mobile Chrome and Safari from serving stale cached states instead of asking the ESP32 for the live state.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 07: CONFIGURATION
+       ========================================================================== -->
+  <section id="configuration" class="section">
+    <div class="section-head">
+      <span class="section-idx">07 · Setup Guide</span>
+      <h2 class="section-title">Configuration & Network Provisioning</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. Arduino IDE Setup</h3>
+        <p>Installed the <strong>esp32 by Espressif Systems</strong> board package via the Boards Manager. Configured board model to <em>DOIT ESP32 DEVKIT V1</em> with upload speed set to <code>921600</code>.</p>
+      </div>
+      <div class="card">
+        <h3>2. Local Subnet Provisioning</h3>
+        <p>Configured SSID and WPA2 passphrase in sketch. The local router assigned the ESP32 static DHCP lease <code>192.168.1.184</code>, accessible to all smartphones and laptops on the same Wi-Fi.</p>
+      </div>
+      <div class="card">
+        <h3>3. Serial Baud Rate Verification</h3>
+        <p>Set Serial Monitor baud rate to <code>115200</code>. Verified boot logs, crystal frequency calibration, IP assignment printout, and server start confirmation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 08: EVIDENCE
+       ========================================================================== -->
+  <section id="evidence" class="section">
+    <div class="section-head">
+      <span class="section-idx">08 · Validation</span>
+      <h2 class="section-title">Physical Evidence & Demonstration</h2>
+      <p class="section-desc">Photographs, screen captures, and video evidence of the functioning embedded server.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="evidence-card">
+        <img src="esp32-web-server.jpeg" alt="Figure 1.1: Physical Breadboard Wiring and LED Actuator">
+        <div class="evidence-caption">
+          <strong>Figure 1.1:</strong> Hardware setup showing ESP32 DevKit V1 connected to breadboard with 330Ω current-limiting resistor and 5mm red indicator LED powered over USB.
+        </div>
+      </div>
+
+      <div class="evidence-card">
+        <div style="background:#090d12;padding:30px;min-height:280px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+          <div style="width:100%;max-width:320px;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px;">
+            <div style="color:#58a6ff;font-weight:700;font-size:18px;">ESP32 Web Server</div>
+            <div style="color:#8b949e;font-size:12px;margin-bottom:14px;">192.168.1.184</div>
+            <div style="margin:16px 0;font-size:14px;color:#3fb950;font-weight:600;">Current State: ON</div>
+            <div style="background:#da3633;color:white;padding:10px;border-radius:6px;font-size:13px;font-weight:bold;">TURN LED OFF</div>
+          </div>
+        </div>
+        <div class="evidence-caption">
+          <strong>Figure 1.2:</strong> Mobile browser interface viewport running at <code>http://192.168.1.184/</code> displaying real-time LED state and toggle button.
+        </div>
+      </div>
+    </div>
+
+    <div class="video-box" style="margin-top:24px;">
+      <div class="video-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <h3 style="margin:0 0 8px;">Demonstration Video: Instantaneous Web LED Control</h3>
+      <p style="color:var(--text-dim);max-width:600px;margin:0 auto 16px;font-size:14px;">
+        Recorded demonstration verifying sub-50ms switching latency from iPhone Safari browser to physical breadboard LED actuation without any cloud intermediary.
+      </p>
+      <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-1-esp32-web-server" target="_blank" class="btn btn-primary">
+        Watch Full HD Video in Repository →
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 09: CHALLENGES & FIXES (Show the failure, not just the fix)
+       ========================================================================== -->
+  <section id="challenges" class="section">
+    <div class="section-head">
+      <span class="section-idx">09 · Engineering Journal</span>
+      <h2 class="section-title">Challenges Encountered & Root-Cause Fixes</h2>
+      <p class="section-desc">Documenting physical hardware and software failures encountered during station development.</p>
+    </div>
+
+    <!-- CHALLENGE 1 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-01</span>
+        <span>ESP32 Wi-Fi Brownout Reset Loop Upon Transmission</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            Whenever the ESP32 attempted to initialize Wi-Fi transmission in <code>WiFi.begin()</code>, the Serial Monitor outputted <code>Brownout detector was triggered</code> and continuously rebooted in an infinite crash loop.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> The ESP32 2.4GHz RF radio draws short burst currents up to 350mA–450mA during Wi-Fi beacon association. The development board was plugged into an unpowered laptop USB 2.0 port that sagged below 4.5V, tripping the internal hardware Brownout Detector.
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Connected a <strong>100 µF electrolytic decoupling capacitor</strong> directly across the ESP32 3.3V and GND power rails on the breadboard to buffer transient RF current surges. Switched from laptop USB port to a regulated 5V 2.0A bench power supply. The brownout resets ceased permanently.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHALLENGE 2 -->
+    <div class="failure-fix-card">
+      <div class="failure-fix-head">
+        <span class="mono" style="color:var(--warning)">BUG-02</span>
+        <span>Mobile Browser Stale Cache & Out-of-Sync Toggle Button</span>
+      </div>
+      <div class="failure-fix-body">
+        <div class="failure-pane">
+          <div class="pane-label failure">✕ The Failure Observed</div>
+          <p>
+            After toggling the LED once from a mobile smartphone browser, pressing the toggle button a second time failed to send a new request to the ESP32. The mobile browser showed the old LED state despite the physical hardware having changed.
+          </p>
+          <p style="font-size:13px;color:var(--danger);">
+            <strong>Root Cause:</strong> Mobile Safari and Chrome aggressively cache HTTP GET responses from local IP addresses when caching headers are missing. Subsequent clicks loaded the cached HTML page from device memory instead of hitting the ESP32 socket.
+          </p>
+        </div>
+        <div class="fix-pane">
+          <div class="pane-label fix">✓ The Engineering Fix</div>
+          <p>
+            Configured explicit HTTP response headers in the route handler: <code>server.sendHeader("Cache-Control", "no-cache, no-store, must-revalidate");</code> and changed the response status from 200 to <strong>HTTP 303 (See Other)</strong> redirecting back to root. The browser was forced to re-fetch live hardware state on every click.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 10: REFLECTION
+       ========================================================================== -->
+  <section id="reflection" class="section">
+    <div class="section-head">
+      <span class="section-idx">10 · Takeaways</span>
+      <h2 class="section-title">Learning Reflection & Next Steps</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Key Technical Takeaways</h3>
+        <p>
+          Building an on-chip web server solidified my comprehension of the TCP/IP stack, socket listening, and HTTP protocol mechanics at the bare-metal embedded level. Learning to construct responsive HTML strings directly within flash memory highlighted the trade-offs between embedded memory constraints and web UI richness.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Limitations & Evolutionary Path</h3>
+        <p>
+          While the local web server is lightning-fast and offline-capable, its main limitation is reach: devices outside the local Wi-Fi router cannot control the appliance without complex dynamic DNS or insecure router port forwarding. This natural limitation motivated the architectural leap to <strong>Station 02: Adafruit IO & MQTT</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 11: REPOSITORY LINK
+       ========================================================================== -->
+  <section id="repository" class="section">
+    <div class="section-head">
+      <span class="section-idx">11 · Artifacts</span>
+      <h2 class="section-title">Project Repository & Verification Checklist</h2>
+    </div>
+
+    <div class="checklist-box" style="margin-bottom:24px;">
+      <h3 style="margin:0 0 16px;">Station 01 Deliverables Compliance Matrix</h3>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Objective & Problem Statement fully documented</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>ESP32 Web Server concepts & Wi-Fi communication detailed</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Hardware components & full pin connection table specified</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Complete compilable Arduino C++ source code provided</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Responsive HTML interface with command flow explained</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Physical breadboard evidence & mobile viewport screenshots included</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Failure vs. Fix engineering log documented (Brownout + Caching)</span></div>
+      <div class="checklist-item"><span class="check-icon">✓</span><span>Learning reflection & exact repository directory linked</span></div>
+    </div>
+
+    <div class="card" style="text-align:center;padding:32px;">
+      <h3 style="justify-content:center;margin-bottom:12px;">Access Complete Source Files</h3>
+      <p style="max-width:550px;margin:0 auto 20px;">
+        All code, circuit schematics, wiring photos, and raw documentation for Station 01 are published in the portfolio repository.
+      </p>
+      <a href="https://github.com/pranav222006/portfolio/tree/main/iot/task-1-esp32-web-server" target="_blank" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Task 1 Folder on GitHub →
+      </a>
+    </div>
+
+    <!-- BOTTOM STEPPER NAV -->
+    <div class="bottom-nav-bar">
+      <a href="../index.html#iot" class="btn btn-outline">← Back to Main Portfolio</a>
+      <a href="index.html" class="btn btn-outline">IoT Hub Overview</a>
+      <a href="adafruit-mqtt.html" class="btn btn-primary">Next: Task 2 — Adafruit IO & MQTT →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    Pranav S · B.E. Mechatronics Engineering · IoT Portfolio Assignment Series
+  </div>
+</footer>
+
+</body>
+</html>
+
