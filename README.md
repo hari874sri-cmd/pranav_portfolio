@@ -3,7 +3,7 @@
 > **Final Assessment: Software Development**  
 > **Individual Task Title:** Vibe Check: Responsive Mood-Adaptive Music Streaming Platform with Dual-Database AI Support Assistant  
 > **Live Website Link (HTTPS):** `https://vibecheck-final.onrender.com` *(Replace with your live deployment URL)*  
-> **GitHub Repository:** `https://github.com/pranav222006/portfolio`  
+> **GitHub Repository:** `https://github.com/hari874sri-cmd/pranav_portfolio`  
 
 ---
 
@@ -73,7 +73,7 @@ This project is a production-ready Django web application integrated with a dual
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/pranav222006/portfolio.git
+git clone https://github.com/hari874sri-cmd/pranav_portfolio.git
 cd portfolio
 ```
 
